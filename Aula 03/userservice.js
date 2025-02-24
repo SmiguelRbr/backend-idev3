@@ -1,4 +1,6 @@
 const User = require('./user')
+const path = require('path')
+const fs = require ('fs')
 
 class userService{
     constuctor(){
