@@ -40,9 +40,9 @@ return [] //se não der true, roda um array vazio
   }
 }
 
-    addUser(nome,email){ //função pra adicionar usuários
+    addUser(nome, email, senha, endereco, telefone, cpf){ //função pra adicionar usuários
       try{
-        const user = new User(this.nextID++, nome, email)  //cria novo user, e o novoid++ é pra toda vez aumentar um no id
+        const user = new User(this.nextID++, nome, email, senha, endereco, telefone, cpf)  //cria novo user, e o novoid++ é pra toda vez aumentar um no id
         this.users.push(user) //da um push pra armazenar esse user no array de usuarios
         this.saveUsers();
         return user
