@@ -13,7 +13,7 @@ class userService{
     try { //vai tentar isso enquanto der certo
  if (fs.existsSync(this.filePath)){ //se dentro do arquivo Json existir algum dado, ele da true e entra no if
 const data = fs.readFileSync(this.filePath) //quando true, ele da um read, ele lê o arquivo Json e salva na Data
-return json.parse(data) //ele transforma a data do json em um Array de objetos
+return JSON.parse(data) //ele transforma a data do json em um Array de objetos
  } 
   } catch(erro){ //se o try der errado, ele vai mostrar que deu erro
 console.log('Erro ao carregar arquivo', erro) //vai ler o erro que deu no console
@@ -58,6 +58,35 @@ return [] //se não der true, roda um array vazio
       console.log('Erro ao chamar usuário', erro)
     }
   }
-}
+
+  deleteUser(id){
+    try{
+      this.users = this.users.filter(user => user.id !== id)
+      this.saveUsers()
+    }catch(erro){
+      console.log('Erro ao deletar o usuário')
+    }
+  }
+
+  editUser(id, novosDados){
+    try{
+      const index = this.users.findIndex(user => user.id === id)
+
+      if(index === -1){
+        console.log(`Usuário com ID ${id} não encontrado.`);
+            return null;
+      }
+
+      this.users[index] = {...this.users[index], ...novosDados}
+
+      this.saveUsers();
+
+      return this.users[index]
+      
+    }catch (erro){
+      console.log('Erro ao editar Usuario', erro)
+    }
+  }
+}   
 
 module.exports = new userService
